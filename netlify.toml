@@ -12,5 +12,6 @@
     database_name = "value"
 
 [[redirects]]
-    from = "*"
-    to = "/"
+    from = "/*"
+    to = "/login"
+    status = 200
