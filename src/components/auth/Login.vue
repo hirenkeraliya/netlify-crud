@@ -25,13 +25,12 @@ export default {
     },
 
     mounted: function () {
-        this.user = netlifyIdentity.currentUser();
-        console.log(this.user);
-
         netlifyIdentity.init({
             container: '#login-button',
             APIUrl: 'https://netlify-crud.netlify.com/.netlify/identity'
         });
+
+        this.user = netlifyIdentity.currentUser();
 
         netlifyIdentity.on('login', user => this.user = user);
     }
