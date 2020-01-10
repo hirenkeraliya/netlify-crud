@@ -14,7 +14,6 @@ export default {
 
     data() {
         return {
-            user: {},
         }
     },
 
@@ -30,9 +29,17 @@ export default {
             APIUrl: 'https://netlify-crud.netlify.com/.netlify/identity'
         });
 
-        this.user = netlifyIdentity.currentUser();
+        let user = netlifyIdentity.currentUser();
+        if (user) {
+            this.$store.commit('setUserData', user);
 
-        netlifyIdentity.on('login', user => this.user = user);
+            return;
+        }
+
+        let self = this;
+        netlifyIdentity.on('login', (user) => {
+            self.$store.commit('setUserData', user)
+        });
     }
 }
 </script>
