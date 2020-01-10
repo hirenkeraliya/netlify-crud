@@ -1,14 +1,18 @@
 import Vue from 'vue'
-import App from './App.vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import VueRouter from 'vue-router'
+import router from './layouts/router'
+import Toasted from 'vue-toasted'
 
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
-Vue.use(VueRouter)
+Vue.use(Toasted, {
+    iconPack: 'fontawesome'
+})
 
 Vue.config.productionTip = false
+Vue.config.runtimeCompiler = true
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+    router,
+    el: '#app'
+});
