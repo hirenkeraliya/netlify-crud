@@ -10,3 +10,7 @@
     db_user = "value"
     db_password = "value"
     database_name = "value"
+
+[[redirects]]
+    from = "*"
+    to = "/"
