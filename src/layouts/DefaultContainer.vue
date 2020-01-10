@@ -2,7 +2,7 @@
     <div>
         <b-navbar toggleable="lg" type="dark" variant="info">
             <b-navbar-brand href="/">
-                <img src="logo.png">
+                <img src="/logo.png">
             </b-navbar-brand>
 
             <b-navbar-nav class="ml-auto">

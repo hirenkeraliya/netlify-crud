@@ -7,7 +7,10 @@
             <template v-slot:header>
                 <h4 class="d-inline-block text-white mt-1">Students</h4>
 
-                <b-button class="float-right" variant="info">
+                <b-button class="float-right"
+                    variant="info"
+                    :to="{ name: 'StudentsAdd' }"
+                >
                     Add New Student
                 </b-button>
             </template>

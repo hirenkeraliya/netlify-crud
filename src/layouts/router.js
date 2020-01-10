@@ -9,6 +9,7 @@ const Login = () => import('../components/auth/Login.vue')
 const GuestContainer = () => import('./GuestContainer.vue')
 const DefaultContainer = () => import('./DefaultContainer.vue')
 const StudentsList = () => import('../components/students/StudentsList.vue')
+const StudentsForm = () => import('../components/students/StudentsForm.vue')
 
 const router = new Router({
     mode: 'history',
@@ -30,14 +31,30 @@ const router = new Router({
         path: '',
         redirect: '/students',
         component: DefaultContainer,
-        children: [{
-            path: '/students',
-            name: 'StudentsList',
-            component: StudentsList,
-            meta: {
-                label: 'Students',
+        children: [
+            {
+                path: '/students',
+                name: 'StudentsList',
+                component: StudentsList,
+                meta: {
+                    label: 'Students',
+                }
+            }, {
+                path: '/students/add',
+                name: 'StudentsAdd',
+                component: StudentsForm,
+                meta: {
+                    label: 'Add New Student',
+                }
+            }, {
+                path: '/students/:student',
+                name: 'StudentsEdit',
+                component: StudentsForm,
+                meta: {
+                    label: 'Edit Student',
+                }
             }
-        }],
+        ],
     }, {
         path: '*',
         component: PageNotFound
