@@ -16,6 +16,10 @@
     to = "/.netlify/functions/getStudents/getStudents.js"
     status = 200
 [[redirects]]
+    from = "/add-new-student"
+    to = "/.netlify/functions/addNewStudent/addNewStudent.js"
+    status = 200
+[[redirects]]
     from = "/*"
     to = "/index.html"
     status = 200

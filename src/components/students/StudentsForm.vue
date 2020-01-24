@@ -1,6 +1,6 @@
 <template>
     <div class="mt-5">
-        <b-form @submit.prevent="">
+        <b-col cols="12" md="6" offset-md="3">
             <b-card
                 header-tag="header"
                 header-bg-variant="dark"
@@ -19,7 +19,7 @@
 
                     <b-button class="float-right mr-3"
                         variant="success"
-                        @click="student ? updateStudentDetails : addNewStudent"
+                        @click="student ? updateStudentDetails : addNewStudent()"
                     >
                         Save
                     </b-button>
@@ -37,11 +37,13 @@
                     <b-form-input type="text" v-model="studentForm.phone" />
                 </b-form-group>
             </b-card>
-        </b-form>
+        </b-col>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     name: 'StudentsForm',
 
@@ -65,10 +67,29 @@ export default {
         },
 
         addNewStudent() {
-            this.$router.push({ name: 'StudentsList' })
+            let self = this;
+            if (! this.studentForm.name || ! this.studentForm.email || ! this.studentForm.phone) {
+                self.$toasted.error('Please fill all the fields.');
+                return;
+            }
+
+            axios.post(
+                '/add-new-student',
+                this.studentForm
+            ).then(function () {
+                self.$router.push({ name: 'StudentsList' });
+
+                self.$toasted.success('Student added successfully.')
+            }).catch(function (error) {
+                console.log(error);
+
+                self.$toasted.error('Something went wrong.')
+            });
         },
 
         updateStudentDetails() {
+            console.log('hi');
+
             this.$router.push({ name: 'StudentsList' })
         }
     },
