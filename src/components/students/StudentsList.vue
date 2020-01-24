@@ -54,15 +54,17 @@
                     <b-button size="sm"
                         variant="primary"
                         class="mr-1 btn-brand"
+                        title="Edit Student"
                     >
-                        <i class="fa fa-edit" title="Edit Student"></i>
+                        <font-awesome-icon icon="edit"></font-awesome-icon>
                     </b-button>
 
                     <b-button size="sm"
                         variant="danger"
                         class="mr-1 btn-brand"
+                        title="Delete Student"
                     >
-                        <i class="fa fa-close" title="Delete Student"></i>
+                        <font-awesome-icon icon="trash"></font-awesome-icon>
                     </b-button>
                 </template>
             </b-table>
@@ -87,9 +89,10 @@
 
 <script>
 import Multiselect from 'vue-multiselect';
+import axios from 'axios';
 
 export default {
-    name: 'Login',
+    name: 'StudentList',
 
     components: { Multiselect },
 
@@ -155,7 +158,16 @@ export default {
         },
 
         fetchStudents() {
-            return [];
+            let self = this;
+
+            return axios.get('/get-students')
+            .then(function (response) {
+                self.totalRows = response.data.students.length
+                return response.data.students;
+            })
+            .catch(function () {
+                return [];
+            });
         },
     },
 }

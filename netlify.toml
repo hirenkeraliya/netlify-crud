@@ -12,6 +12,10 @@
     database_name = "value"
 
 [[redirects]]
+    from = "/get-students"
+    to = "/.netlify/functions/getStudents/getStudents.js"
+    status = 200
+[[redirects]]
     from = "/*"
     to = "/index.html"
     status = 200
