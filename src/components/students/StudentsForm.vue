@@ -69,7 +69,7 @@ export default {
         addNewStudent() {
             let self = this;
             if (! this.studentForm.name || ! this.studentForm.email || ! this.studentForm.phone) {
-                self.$toasted.error('Please fill all the fields.');
+                self.$toasted.error('Please fill all the fields.', { duration: 3000 });
                 return;
             }
 
@@ -79,11 +79,11 @@ export default {
             ).then(function () {
                 self.$router.push({ name: 'StudentsList' });
 
-                self.$toasted.success('Student added successfully.')
+                self.$toasted.success('Student added successfully.', { duration: 3000 })
             }).catch(function (error) {
                 console.log(error);
 
-                self.$toasted.error('Something went wrong.')
+                self.$toasted.error('Something went wrong.', { duration: 3000 })
             });
         },
 
