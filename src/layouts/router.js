@@ -50,6 +50,7 @@ const router = new Router({
                 path: '/students/:student',
                 name: 'StudentsEdit',
                 component: StudentsForm,
+                props: true,
                 meta: {
                     label: 'Edit Student',
                 }

@@ -55,6 +55,7 @@
                         variant="primary"
                         class="mr-1 btn-brand"
                         title="Edit Student"
+                        :to="{ name: 'StudentsEdit', params: { student: data.item.id } }"
                     >
                         <font-awesome-icon icon="edit"></font-awesome-icon>
                     </b-button>
@@ -63,6 +64,7 @@
                         variant="danger"
                         class="mr-1 btn-brand"
                         title="Delete Student"
+                        @click="displayDeleteStudentModel(data)"
                     >
                         <font-awesome-icon icon="trash"></font-awesome-icon>
                     </b-button>
@@ -84,6 +86,17 @@
                 </b-col>
             </b-row>
         </b-card>
+
+        <b-modal header-bg-variant="danger"
+            ref="delete-student-modal"
+            title="Delete Student"
+            cancel-title="No, Cancel"
+            ok-title="Yes, Student"
+            ok-variant="danger"
+            @ok="deleteStudent()"
+        >
+            Are you sure you want to delete {{ deleteName }}?
+        </b-modal>
     </div>
 </template>
 
@@ -147,6 +160,8 @@ export default {
                     key: 'actions'
                 },
             ],
+            deleteId: '',
+            deleteName: '',
         }
     },
 
@@ -167,6 +182,35 @@ export default {
             })
             .catch(function () {
                 return [];
+            });
+        },
+
+        displayDeleteStudentModel(data) {
+            this.deleteId = data.item.id;
+            this.deleteName = data.item.name;
+            this.$refs['delete-student-modal'].show()
+        },
+
+        deleteStudent() {
+            let self = this;
+            axios.get('/remove-student', {
+                params: {
+                    id: this.deleteId
+                }
+            })
+            .then(function () {
+                self.$toasted.success(
+                    'Student deleted successfully.',
+                    { icon: 'check', duration: 3000 }
+                );
+
+                self.$root.$emit('bv::refresh::table', 'students-table')
+            })
+            .catch(function () {
+                self.$toasted.error(
+                    'An error occurred while trying to delete this student. Please try again.',
+                    { duration: 3000 }
+                )
             });
         },
     },

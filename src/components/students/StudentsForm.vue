@@ -19,7 +19,7 @@
 
                     <b-button class="float-right mr-3"
                         variant="success"
-                        @click="student ? updateStudentDetails : addNewStudent()"
+                        @click="student ? updateStudentDetails() : addNewStudent()"
                     >
                         Save
                     </b-button>
@@ -88,15 +88,41 @@ export default {
         },
 
         updateStudentDetails() {
-            console.log('hi');
+            let self = this;
+            if (! this.studentForm.name || ! this.studentForm.email || ! this.studentForm.phone) {
+                self.$toasted.error('Please fill all the fields.', { duration: 3000 });
+                return;
+            }
 
-            this.$router.push({ name: 'StudentsList' })
+            axios.post(
+                '/update-student',
+                this.studentForm
+            ).then(function () {
+                self.$router.push({ name: 'StudentsList' });
+
+                self.$toasted.success('Student updated successfully.', { duration: 3000 })
+            }).catch(function (error) {
+                console.log(error);
+
+                self.$toasted.error('Something went wrong.', { duration: 3000 })
+            });
         }
     },
 
     created() {
         if (this.student) {
-            console.log('hi');
+            let self = this;
+            axios.get('/edit-student', {
+                params: {
+                    id: this.student
+                }
+            })
+            .then(function (response) {
+                self.studentForm = response.data.student;
+            })
+            .catch(function () {
+                return [];
+            });
         }
     }
 }

@@ -20,6 +20,20 @@
     to = "/.netlify/functions/addNewStudent/addNewStudent.js"
     status = 200
 [[redirects]]
+    from = "/edit-student"
+    to = "/.netlify/functions/editStudent/editStudent.js?id=:id"
+    query = { id = ":id"}
+    status = 200
+[[redirects]]
+    from = "/update-student"
+    to = "/.netlify/functions/updateStudent/updateStudent.js"
+    status = 200
+[[redirects]]
+    from = "/remove-student"
+    to = "/.netlify/functions/removeStudent/removeStudent.js?id=:id"
+    query = { id = ":id"}
+    status = 200
+[[redirects]]
     from = "/*"
     to = "/index.html"
     status = 200
