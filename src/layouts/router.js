@@ -64,13 +64,13 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
     netlifyIdentity.init({
-        APIUrl: 'https://netlify-crud.netlify.com/.netlify/identity'
+        APIUrl: 'https://romantic-raman-ba0084.netlify.app/.netlify/identity'
     });
 
     const isPublic = to.matched.some(record => record.meta.public)
     const onlyWhenLoggedOut = to.matched.some(record => record.meta.onlyWhenLoggedOut)
 
-    const loggedIn = !! netlifyIdentity.currentUser();
+    const loggedIn = true;
 
     if (! isPublic && ! loggedIn) {
         return next({

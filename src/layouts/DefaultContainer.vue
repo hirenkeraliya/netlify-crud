@@ -63,7 +63,7 @@
 
         mounted() {
             netlifyIdentity.init({
-                APIUrl: 'https://netlify-crud.netlify.com/.netlify/identity'
+                APIUrl: 'https://romantic-raman-ba0084.netlify.app/.netlify/identity'
             });
 
             this.$store.commit('setUserData', netlifyIdentity.currentUser());

@@ -26,7 +26,7 @@ export default {
     mounted: function () {
         netlifyIdentity.init({
             container: '#login-button',
-            APIUrl: 'https://netlify-crud.netlify.com/.netlify/identity'
+            APIUrl: 'https://romantic-raman-ba0084.netlify.app/.netlify/identity'
         });
 
         let user = netlifyIdentity.currentUser();
