@@ -6,9 +6,9 @@ exports.handler = async function (event, context) {
         let connection = await mysql.createConnection({
             host: 'remotemysql.com',
             port: 3306,
-            user: 'HUsuEQonjy',
-            password: '1f3NmBt9vW',
-            database: 'HUsuEQonjy'
+            user: 'LPDOlK2gkX',
+            password: 'p1xbGyuioV',
+            database: 'LPDOlK2gkX'
         });
         await connection.connect();
 
